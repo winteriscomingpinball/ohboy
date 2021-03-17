@@ -419,7 +419,7 @@ int dialog_end(int* rombrowsing){
 		if(delay>0){
 			delay--;
 		} else {
-			if(delay<1) delay = 40;
+			if(delay<1) delay = 400;
 			if(dirty.update == GUI_FLIP)
 			dialog_drawdirty(&dirty);
 

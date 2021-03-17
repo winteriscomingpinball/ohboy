@@ -145,10 +145,10 @@ enum
 		if(event.type == SDL_KEYDOWN || event.type == SDL_KEYUP){
 			ev->state = event.key.state == SDL_PRESSED ? GUI_PRESSED : GUI_RELEASED;
 			switch(event.key.keysym.sym){
-				case SDLK_RETURN:
+				case SDLK_F1:
 					ev->key = GUI_SELECT;
 					break;
-				case SDLK_ESCAPE:
+				case SDLK_RSHIFT:
 					ev->key = GUI_BACK;
 					break;
 				case SDLK_UP:

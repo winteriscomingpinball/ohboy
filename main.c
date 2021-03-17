@@ -45,6 +45,8 @@
 #   define prefetch(x, y)
 #endif
 
+#define DINGOO_OPENDINGUX=1
+
 void ohb_loadrom(char *rom);
 
 /* fps */

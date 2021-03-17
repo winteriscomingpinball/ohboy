@@ -13,6 +13,9 @@
 #include <stdio.h>
 
 #include <SDL/SDL.h>
+#include <fcntl.h>
+#include <sys/ioctl.h>
+#include <signal.h>
 
 #include "SFont.h"
 #include "font8px.h"
@@ -22,7 +25,28 @@
 #include "input.h"
 #include "rc.h"
 
+#include "drv_display.h"
+
+#define DEFAULTFBDEV  "/dev/fb0"
+#define DEFAULTFBMODE "/etc/fb.modes"
+#define displayno 0
+#define DISP_DEV "/dev/disp"
+
+#define MODKEY SDLK_UP
+#define PRESSEDKEY SDLK_F1
+#define REPORTEDKEY SDLK_SPACE
+
+bool keymodstate=0;
+bool reportedkeystate=0;
+
+int exitcheck=0;
+
+
 struct fb fb;
+
+const char *fbdev = DEFAULTFBDEV;
+struct fb_var_screeninfo fb_var;
+disp_layer_info layerinfo;
 
 static int use_yuv = -1;
 static int fullscreen = 1;
@@ -36,7 +60,7 @@ static SDL_Surface *screen;
 static SDL_Overlay *overlay;
 static SDL_Rect overlay_rect;
 
-static int vmode[3] = { 0, 0, 16 };
+static int vmode[3] = { 0, 0, 32 };
 
 /* fps */
 static int sdl_showfps = 0; 
@@ -179,13 +203,121 @@ static void overlay_init()
 void vid_init()
 {
 	int flags;
+	
+	int fh; 
+	int dispfile;
+	int ret;
+	int args[4] = {displayno, 3, (unsigned long)(&layerinfo), 0};
+	
+	
+	fh = open(fbdev, O_RDONLY);
+	
+	if ( fh < 0 )
+  {
+    puts("open fb0 failed");
+  }
+  else
+  {
+    ioctl(fh, 0x4600u, &fb_var);
+	
+	
+	
+	printf("Current screen xres_virtual = %d\n", fb_var.xres_virtual);
+		 
+		  printf("Current screen yres_virtual = %d\n", fb_var.yres_virtual);
+		 
+		  printf("Current screen xres = %d\n", fb_var.xres);
+		
+		  printf("Current screen yres = %d\n", fb_var.yres);
+		
+		  printf("Current screen yoffset = %d\n", fb_var.yoffset);
+		  
+		  
+		  printf("Current screen bits_per_pixel = %d\n", fb_var.bits_per_pixel);
+		  
+		  
+		  
+		  
+    fb_var.bits_per_pixel=32;
+	printf("setting bits per pixel to %d\n",fb_var.bits_per_pixel);
+	
+	fb_var.yres_virtual=180;
+	fb_var.xres_virtual=240;
+	
+	fb_var.yres=180;
+	fb_var.xres=240;
+	
+	/* //use this to set framebuffer */
+	ioctl(fh, 0x4601, &fb_var);/* //FBIOPUT_VSCREENINFO */
+	
+	
+		  
+  }
+  
+  
+  dispfile = open(DISP_DEV, O_RDWR, 0);
+  if (dispfile < 0) {
+		perror("open");
+		
+	}else{
+  
+  if (ioctl(dispfile, DISP_CMD_LAYER_GET_INFO, &args) < 0)
+		perror("ioctl: 0x43 - DISP_CMD_LAYER_GET_INFO");
+	    
+		
+		puts("Got layer 3 info");
+	
+	
+	layerinfo.fb.size.width=144;
+	layerinfo.fb.size.height=160;
+	
+	layerinfo.fb.src_win.height=240;
+	layerinfo.fb.src_win.height=180;
+	
+	layerinfo.screen_win.width=240;
+	layerinfo.screen_win.height=180;
+	layerinfo.screen_win.y=38;
+	
+	
+	layerinfo.alpha_mode=0;
+	layerinfo.mode=DISP_LAYER_WORK_MODE_SCALER;
+	
+	if (ioctl(dispfile, DISP_CMD_LAYER_SET_INFO, &args) < 0)/* //DISP_CMD_LAYER_SET_INFO */
+		perror("ioctl: 0x42 - DISP_CMD_LAYER_SET_INFO");
+    puts("set layer 3 info...");
+	
+	
+	args[1]=0;
+	if (ioctl(dispfile, DISP_CMD_LAYER_DISABLE, &args) < 0)/* //DISP_CMD_LAYER_DISABLE  */
+			perror("ioctl: 0x41 - DISP_CMD_LAYER_DISABLE");	
+			puts("disabled layer 0");
+	args[1]=1;		
+	if (ioctl(dispfile, DISP_CMD_LAYER_DISABLE, &args) < 0)/* //DISP_CMD_LAYER_DISABLE  */
+			perror("ioctl: 0x41 - DISP_CMD_LAYER_DISABLE");	
+			puts("disabled layer 1");
+	args[1]=2;
+	if (ioctl(dispfile, DISP_CMD_LAYER_DISABLE, &args) < 0)/* //DISP_CMD_LAYER_DISABLE  */
+			perror("ioctl: 0x41 - DISP_CMD_LAYER_DISABLE");	
+			puts("disabled layer 2");
+		
+		
+		
+		
+	
+	}
+	
+	close(dispfile);
+	
 
 	if (!vmode[0] || !vmode[1])
 	{
 		int scale = rc_getint("scale");
 		if (scale < 1) scale = 1;
-		vmode[0] = 160 * scale;
-		vmode[1] = 144 * scale;
+		//vmode[0] = 160 * scale;
+		//vmode[1] = 144 * scale;
+		vmode[0] = 240;
+		vmode[1] = 180;
+		
 	}
 	
 	flags = SDL_ANYFORMAT | SDL_HWPALETTE | SDL_HWSURFACE;

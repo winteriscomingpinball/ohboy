@@ -45,7 +45,7 @@
 #   define prefetch(x, y)
 #endif
 
-#define DINGOO_OPENDINGUX=1
+//#define DINGOO_OPENDINGUX=1
 
 void ohb_loadrom(char *rom);
 
@@ -1440,10 +1440,10 @@ void vid_begin(){
 				((g & 0xfc) << 3) | //mask out two bits, move em to their place (rrrrr gggggg 00000)
 				((b & 0xf8) >> 3); //mask out three bits, shift em to their plae (rrrrr gggggg bbbbb)
 		SDL_FillRect(screen, &rect, hexcolor);
-		#if defined(DINGOO_OPENDINGUX)
+		//#if defined(DINGOO_OPENDINGUX)
 		SDL_Flip(screen);                                        /*Fix for flickering borders with double buffer*/
-		SDL_FillRect(screen, &rect, hexcolor);                   /*Paints the border color two times*/
-		#endif /*DINGOO_OPENDINGUX*/
+		//SDL_FillRect(screen, &rect, hexcolor);                   /*Paints the border color two times*/
+		//#endif /*DINGOO_OPENDINGUX*/
 	
 		vid_init;
 		if (!upscaler) {
@@ -1453,10 +1453,10 @@ void vid_begin(){
 			border1.w=320;
 			border1.h=240;
 			SDL_BlitSurface(bordersf, &border1, screen, NULL);
-			#if defined(DINGOO_OPENDINGUX)
+			//#if defined(DINGOO_OPENDINGUX)
 			SDL_Flip(screen);                                    /*Fix for flickering borders with double buffer*/
-			SDL_BlitSurface(bordersf, &border1, screen, NULL);   /*Paints the border image two times*/
-			#endif /*DINGOO_OPENDINGUX*/
+			//SDL_BlitSurface(bordersf, &border1, screen, NULL);   /*Paints the border image two times*/
+			//#endif /*DINGOO_OPENDINGUX*/
 		}
 		if ((upscaler > 0) && (upscaler < 3)) {
 			SDL_Rect border1;
@@ -1465,10 +1465,10 @@ void vid_begin(){
 			border1.w=320;
 			border1.h=240;
 			SDL_BlitSurface(bordersf, &border1, screen, NULL);
-			#if defined(DINGOO_OPENDINGUX)
+			//#if defined(DINGOO_OPENDINGUX)
 			SDL_Flip(screen);                                    /*Fix for flickering borders with double buffer*/
-			SDL_BlitSurface(bordersf, &border1, screen, NULL);   /*Paints the border image two times*/
-			#endif /*DINGOO_OPENDINGUX*/
+			//SDL_BlitSurface(bordersf, &border1, screen, NULL);   /*Paints the border image two times*/
+			//#endif /*DINGOO_OPENDINGUX*/
 		}
 		if (upscaler == 3) {
 			SDL_Rect border1;
@@ -1477,10 +1477,10 @@ void vid_begin(){
 			border1.w=320;
 			border1.h=240;
 			SDL_BlitSurface(bordersf, &border1, screen, NULL);
-			#if defined(DINGOO_OPENDINGUX)
+			//#if defined(DINGOO_OPENDINGUX)
 			SDL_Flip(screen);                                    /*Fix for flickering borders with double buffer*/
-			SDL_BlitSurface(bordersf, &border1, screen, NULL);   /*Paints the border image two times*/
-			#endif /*DINGOO_OPENDINGUX*/
+			//SDL_BlitSurface(bordersf, &border1, screen, NULL);   /*Paints the border image two times*/
+			//#endif /*DINGOO_OPENDINGUX*/
 		}
 #ifdef GCWZERO
 		if (upscaler == 5) {
@@ -1496,10 +1496,10 @@ void vid_begin(){
 			border1.w=208;
 			border1.h=160;
 			SDL_BlitSurface(bordersf, &border1, screen, NULL);
-			#if defined(DINGOO_OPENDINGUX)
+			//#if defined(DINGOO_OPENDINGUX)
 			SDL_Flip(screen);                                    /*Fix for flickering borders with double buffer*/
-			SDL_BlitSurface(bordersf, &border1, screen, NULL);   /*Paints the border image two times*/
-			#endif /*DINGOO_OPENDINGUX*/
+			//SDL_BlitSurface(bordersf, &border1, screen, NULL);   /*Paints the border image two times*/
+			//#endif /*DINGOO_OPENDINGUX*/
 		}
 		if (upscaler == 6) {
 			FILE* aspect_ratio_file = fopen("/sys/devices/platform/jz-lcd.0/keep_aspect_ratio", "w");
@@ -1514,10 +1514,10 @@ void vid_begin(){
 			border1.w=192;
 			border1.h=144;
 			SDL_BlitSurface(bordersf, &border1, screen, NULL);
-			#if defined(DINGOO_OPENDINGUX)
+			//#if defined(DINGOO_OPENDINGUX)
 			SDL_Flip(screen);                                    /*Fix for flickering borders with double buffer*/
-			SDL_BlitSurface(bordersf, &border1, screen, NULL);   /*Paints the border image two times*/
-			#endif /*DINGOO_OPENDINGUX*/
+			//SDL_BlitSurface(bordersf, &border1, screen, NULL);   /*Paints the border image two times*/
+			//#endif /*DINGOO_OPENDINGUX*/
 		}
 		if (upscaler == 7) {
 			FILE* aspect_ratio_file = fopen("/sys/devices/platform/jz-lcd.0/keep_aspect_ratio", "w");
@@ -1532,10 +1532,10 @@ void vid_begin(){
 			border1.w=320;
 			border1.h=240;
 			SDL_BlitSurface(bordersf, &border1, screen, NULL);
-			#if defined(DINGOO_OPENDINGUX)
+			//#if defined(DINGOO_OPENDINGUX)
 			SDL_Flip(screen);                                    /*Fix for flickering borders with double buffer*/
-			SDL_BlitSurface(bordersf, &border1, screen, NULL);   /*Paints the border image two times*/
-			#endif /*DINGOO_OPENDINGUX*/
+			//SDL_BlitSurface(bordersf, &border1, screen, NULL);   /*Paints the border image two times*/
+			//#endif /*DINGOO_OPENDINGUX*/
 		}
 #endif
 		vid_fb.first_paint = 0;

@@ -413,13 +413,13 @@ int dialog_end(int* rombrowsing){
 					if(ev.state) exit = -1;
 					break;
 			}
-			delay = ev.state ? -1 : 0;
+			//delay = ev.state ? -1 : 0;
 		}
 
 		if(delay>0){
 			delay--;
 		} else {
-			if(delay<0) delay = 4;
+			if(delay<1) delay = 40;
 			if(dirty.update == GUI_FLIP)
 			dialog_drawdirty(&dirty);
 

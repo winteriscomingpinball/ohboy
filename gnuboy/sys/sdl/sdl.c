@@ -394,12 +394,67 @@ void ev_poll()
 			if ((event.key.keysym.sym == SDLK_RETURN) && (event.key.keysym.mod & KMOD_ALT))
 				SDL_WM_ToggleFullScreen(screen);
 			ev.type = EV_PRESS;
+				switch(event.key.keysym.sym){
+					case SDLK_DOWN:
+					case SDLK_F1:
+					case SDLK_RSHIFT:
+					case SDLK_KP_MULTIPLY:
+						exitcheck++;
+					default:
+					break;
+				}
+			if ((event.key.keysym.sym == SDLK_RETURN) && (event.key.keysym.mod & KMOD_ALT)){
+				SDL_WM_ToggleFullScreen(screen);
+				ev.code = mapscancode(event.key.keysym.sym);
+			}
+			else if ((event.key.keysym.sym == MODKEY)){
+					/* puts("mod key down..."); */
+					keymodstate=1;
+					ev.code = mapscancode(event.key.keysym.sym);
+			} else if (keymodstate==1 && event.key.keysym.sym== PRESSEDKEY){
+				/* puts("got pressed key - need to report a different one... and report that mod key is not pressed."); */
+			    ev.type = EV_RELEASE;
+				ev.code = mapscancode(MODKEY);
+				keymodstate=0;
+				ev_postevent(&ev);
+				
+				ev.type = EV_PRESS;
+				ev.code = mapscancode(REPORTEDKEY);
+				reportedkeystate=1;
+			}else{
+			
+			
 			ev.code = mapscancode(event.key.keysym.sym);
+			
+			}
 			ev_postevent(&ev);
+				
 			break;
 		case SDL_KEYUP:
 			ev.type = EV_RELEASE;
-			ev.code = mapscancode(event.key.keysym.sym);
+			switch(event.key.keysym.sym){
+				case SDLK_DOWN:
+				case SDLK_F1:
+				case SDLK_RSHIFT:
+				case SDLK_KP_MULTIPLY:
+					exitcheck--;
+				default:
+				break;
+			}
+			
+				if ((event.key.keysym.sym == MODKEY)){
+					/* puts("mod key up..."); */
+					keymodstate=0;
+					ev.code = mapscancode(event.key.keysym.sym);
+					
+				}else if(reportedkeystate==1 && event.key.keysym.sym == PRESSEDKEY){
+					reportedkeystate=0;
+					keymodstate=0;
+					ev.code = mapscancode(REPORTEDKEY);
+				}else{
+
+					ev.code = mapscancode(event.key.keysym.sym);
+				}
 			ev_postevent(&ev);
 			break;
 		case SDL_JOYAXISMOTION:
@@ -538,6 +593,10 @@ void ev_poll()
 		default:
 			break;
 		}
+	}
+	
+	if(exitcheck==4){
+		raise(SIGINT);
 	}
 }
 

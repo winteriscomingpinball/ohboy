@@ -284,7 +284,7 @@ void vid_init() {
 	vid_fb.pitch = screen->pitch;
 	vid_fb.indexed = fb.pelsize == 1;
 	//vid_fb.ptr = screen->pixels;
-	vid_fb.ptr = screen->pixels-(320*1*32 + 160);
+	vid_fb.ptr = screen->pixels;
 	vid_fb.cc[0].r = screen->format->Rloss;
 	vid_fb.cc[0].l = screen->format->Rshift;
 	vid_fb.cc[1].r = screen->format->Gloss;
@@ -1126,8 +1126,10 @@ void ohb_no_scale(){
     **  e.g. tie into dirty flag for physical fb (vid_fb.dirty)
     */
 
-#define NO_SCALE_OFFSET 11600 + (320 * 11) /* (320 - 160) / 2)  + 240*((240 - 144) / 2) == 80 + 48 == middle('ish) of screen */
-    /* could make NO_SCALE_OFFSET a variable and count pixels until transparent is hit (or some other chroma-key color/colour) */
+//#define NO_SCALE_OFFSET 11600 + (320 * 11) /* (320 - 160) / 2)  + 240*((240 - 144) / 2) == 80 + 48 == middle('ish) of screen */
+#define NO_SCALE_OFFSET 0
+	
+	/* could make NO_SCALE_OFFSET a variable and count pixels until transparent is hit (or some other chroma-key color/colour) */
 	un16 *src = (un16 *) fb.ptr; /* NOTE this needs to be byte aligned! */
 	un16 *dst = (un16*) vid_fb.ptr + NO_SCALE_OFFSET;
 	int x=0, y=0;

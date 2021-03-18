@@ -299,11 +299,11 @@ void gui_begin(){
 	fbsz = screen->h * screen->pitch;
 	fbcopy = malloc(fbsz);
 	memcpy(fbcopy,screen->pixels,fbsz);
-	gui.clip.x = -30;
+	gui.clip.x = 0;
 	gui.clip.y = 0;
 	//gui.clip.w = gui.w = screen->w;
 	//gui.clip.h = gui.h = screen->h;
-	gui.clip.w = gui.w = 240;
+	gui.clip.w = gui.w = 200;
 	gui.clip.h = gui.h = 180;
 }
 

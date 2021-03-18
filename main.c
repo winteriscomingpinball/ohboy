@@ -284,7 +284,7 @@ void vid_init() {
 	vid_fb.pitch = screen->pitch;
 	vid_fb.indexed = fb.pelsize == 1;
 	//vid_fb.ptr = screen->pixels;
-	vid_fb.ptr = screen->pixels-(320*1*16 + 160);
+	vid_fb.ptr = screen->pixels-(320*1*32 + 160);
 	vid_fb.cc[0].r = screen->format->Rloss;
 	vid_fb.cc[0].l = screen->format->Rshift;
 	vid_fb.cc[1].r = screen->format->Gloss;

@@ -341,7 +341,7 @@ void vid_init()
     }
     myrect.x = 0;
     myrect.y = 0;
-    myrect.w = 320;
+    myrect.w = 240;
     myrect.h = SFont_TextHeight(Font);
     /* fps */
 
@@ -355,8 +355,8 @@ void vid_init()
 	
 	SDL_LockSurface(screen);
 	
-	fb.w = screen->w;
-	fb.h = screen->h;
+	fb.w = 240;//screen->w;
+	fb.h = 180;//screen->h;
 	fb.pelsize = screen->format->BytesPerPixel;
 	fb.pitch = screen->pitch;
 	fb.indexed = fb.pelsize == 1;

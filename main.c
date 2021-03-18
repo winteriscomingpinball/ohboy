@@ -278,8 +278,8 @@ void vid_init() {
 
 
 	SDL_LockSurface(screen);
-	vid_fb.w = 240;//screen->w;
-	vid_fb.h = 180;//screen->h;
+	vid_fb.w = 160;//screen->w;
+	vid_fb.h = 144;//screen->h;
 	vid_fb.pelsize = screen->format->BytesPerPixel;
 	vid_fb.pitch = screen->pitch;
 	vid_fb.indexed = fb.pelsize == 1;
@@ -295,7 +295,7 @@ void vid_init() {
 	fb.w = 160; /* Gameboy native res - width */
 	fb.h = 144; /* Gameboy native res - height */
 	fb.pelsize = 2;
-	fb.pitch = 240;
+	fb.pitch = 320;
 	fb.indexed = 0;
 	fb.cc[0].r = screen->format->Rloss;
 	fb.cc[0].l = screen->format->Rshift;
@@ -311,7 +311,7 @@ void vid_init() {
 	lastframe_fb.w = 160; /* Gameboy native res - width */
 	lastframe_fb.h = 144; /* Gameboy native res - height */
 	lastframe_fb.pelsize = 2;
-	lastframe_fb.pitch = 240;
+	lastframe_fb.pitch = 320;
 	lastframe_fb.indexed = 0;
 	lastframe_fb.cc[0].r = screen->format->Rloss;
 	lastframe_fb.cc[0].l = screen->format->Rshift;
@@ -326,7 +326,7 @@ void vid_init() {
 	currframe_fb.w = 160; /* Gameboy native res - width */
 	currframe_fb.h = 144; /* Gameboy native res - height */
 	currframe_fb.pelsize = 2;
-	currframe_fb.pitch = 240;
+	currframe_fb.pitch = 320;
 	currframe_fb.indexed = 0;
 	currframe_fb.cc[0].r = screen->format->Rloss;
 	currframe_fb.cc[0].l = screen->format->Rshift;

@@ -7,13 +7,13 @@
 
 #include "ubytegui/gui.h"
 
-#if WIZ
+//#if WIZ
 #define GETPIXEL(fb,x,y) 		(((Uint16*)fb) + (screen->w-x)*screen->h)[y]
 #define PUTPIXEL(fb,x,y,color) 	(GETPIXEL(fb,x,y) = color)
-#else
-#define GETPIXEL(fb,x,y) 		((Uint16*)(fb + y*screen->pitch))[x-5]
-#define PUTPIXEL(fb,x,y,color) 	(GETPIXEL(fb,x,y) = color)
-#endif
+//#else
+//#define GETPIXEL(fb,x,y) 		((Uint16*)(fb + y*screen->pitch))[x]
+//#define PUTPIXEL(fb,x,y,color) 	(GETPIXEL(fb,x,y) = color)
+//#endif
 
 extern SDL_Surface *screen;
 void *fbcopy;

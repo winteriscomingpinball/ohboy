@@ -11,7 +11,7 @@
 #define GETPIXEL(fb,x,y) 		(((Uint16*)fb) + (screen->w-x)*screen->h)[y]
 #define PUTPIXEL(fb,x,y,color) 	(GETPIXEL(fb,x,y) = color)
 #else
-#define GETPIXEL(fb,x,y) 		((Uint16*)(fb -30 + y*screen->pitch))[x]
+#define GETPIXEL(fb,x,y) 		((Uint16*)(fb + y*screen->pitch))[x-30]
 #define PUTPIXEL(fb,x,y,color) 	(GETPIXEL(fb,x,y) = color)
 #endif
 

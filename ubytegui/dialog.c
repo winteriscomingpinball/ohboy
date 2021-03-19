@@ -27,7 +27,7 @@ static pixmap_t *dscrollu, *dscrolld, *doptl, *doptr;
 #else
     /* using SFont */
 #define HIGHLIGHT_RECT_OFFSET 0  /* <--- This produces some glitches (for pressstart font) if set to something different than zero */
-#define TEXT_OFFSET 0
+#define TEXT_OFFSET 3
 #define LRARROW_OFFSET -1
 #define UPARROW_OFFSET 4
 #define DOWNARROW_OFFSET 1

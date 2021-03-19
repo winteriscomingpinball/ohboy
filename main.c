@@ -387,8 +387,10 @@ void paint_menu_bg() {
 
 		if(pix){
 			SDL_LockSurface(screen);
-			x = (screen->w - pix->width)/2;
-			y = (screen->h - pix->height)/2;
+			//x = (screen->w - pix->width)/2;
+			//y = (screen->h - pix->height)/2;
+			x=0;
+			y=0;
 			osd_drawpixmap(pix,x,y,0);
 			pixmap_free(pix);
 			SDL_UnlockSurface(screen);

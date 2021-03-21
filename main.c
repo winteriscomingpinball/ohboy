@@ -2248,15 +2248,15 @@ int main(int argc, char *argv[]){
 	char *tmp_buf=NULL;
 
 	SDL_Init(SDL_INIT_VIDEO|SDL_INIT_JOYSTICK);
-#ifdef WIZ
-	screen = WIZ_SetVideoMode(320, 240, 16, SDL_SWSURFACE);
-#else
-#ifdef DINGOO_OPENDINGUX
-	screen = SDL_SetVideoMode(320, 240, 16, SDL_HWSURFACE | SDL_DOUBLEBUF);
-#else
-	screen = SDL_SetVideoMode(320, 240, 16, SDL_SWSURFACE);
-#endif /* DINGOO_OPENDINGUX */
-#endif /* WIZ */
+//#ifdef WIZ
+//	screen = WIZ_SetVideoMode(320, 240, 16, SDL_SWSURFACE);
+//#else
+//#ifdef DINGOO_OPENDINGUX
+//	screen = SDL_SetVideoMode(320, 240, 16, SDL_HWSURFACE | SDL_DOUBLEBUF);
+//#else
+	screen = SDL_SetVideoMode(240, 180, 16, SDL_HWSURFACE);
+//#endif /* DINGOO_OPENDINGUX */
+//#endif /* WIZ */
 	SDL_ShowCursor(0);
 
 	sdl_joy = SDL_JoystickOpen(0);

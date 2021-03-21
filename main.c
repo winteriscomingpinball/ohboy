@@ -2261,7 +2261,7 @@ int main(int argc, char *argv[]){
 //#ifdef DINGOO_OPENDINGUX
 //	screen = SDL_SetVideoMode(320, 240, 16, SDL_HWSURFACE | SDL_DOUBLEBUF);
 //#else
-	screen = SDL_SetVideoMode(240, 180, 16, SDL_HWSURFACE | SDL_FULLSCREEN);
+	screen = SDL_SetVideoMode(240, 180, 16, SDL_HWSURFACE);
 //#endif /* DINGOO_OPENDINGUX */
 //#endif /* WIZ */
 	SDL_ShowCursor(0);

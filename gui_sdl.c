@@ -11,8 +11,8 @@
 //#define GETPIXEL(fb,x,y) 		(((Uint16*)fb) + (screen->w-x)*screen->h)[y]
 //#define PUTPIXEL(fb,x,y,color) 	(GETPIXEL(fb,x,y) = color)
 //#else
-#define GETPIXEL(fb,x,y) 		((Uint16*)(fb + (y-10)*screen->pitch))[x-10]
-#define PUTPIXEL(fb,x,y,color) 	(GETPIXEL(fb,x-10,(y-10)) = color)
+#define GETPIXEL(fb,x,y) 		((Uint16*)(fb + (y)*screen->pitch))[x]
+#define PUTPIXEL(fb,x,y,color) 	(GETPIXEL(fb,x,(y)) = color)
 //#endif
 
 extern SDL_Surface *screen;

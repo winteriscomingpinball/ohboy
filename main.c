@@ -278,8 +278,8 @@ void vid_init() {
 
 
 	SDL_LockSurface(screen);
-	vid_fb.w = 160;//screen->w;
-	vid_fb.h = 144;//screen->h;
+	vid_fb.w = 240;//screen->w;
+	vid_fb.h = 180;//screen->h;
 	vid_fb.pelsize = screen->format->BytesPerPixel;
 	vid_fb.pitch = screen->pitch;
 	vid_fb.indexed = fb.pelsize == 1;

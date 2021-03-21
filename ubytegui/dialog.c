@@ -27,14 +27,14 @@ static pixmap_t *dscrollu, *dscrolld, *doptl, *doptr;
 #else
     /* using SFont */
 #define HIGHLIGHT_RECT_OFFSET 0  /* <--- This produces some glitches (for pressstart font) if set to something different than zero */
-#define TEXT_OFFSET 3
-#define LRARROW_OFFSET -1
-#define UPARROW_OFFSET 4
-#define DOWNARROW_OFFSET 1
-#define TITLE_OFFSET 7
-#define TITLE_LINE_OFFSET 8
-#define STATUS_OFFSET 5
-#define STATUS_LINE_OFFSET -5
+#define TEXT_OFFSET 3-2
+#define LRARROW_OFFSET -1-2
+#define UPARROW_OFFSET 4-2
+#define DOWNARROW_OFFSET 1-2
+#define TITLE_OFFSET 7-2
+#define TITLE_LINE_OFFSET 8-2
+#define STATUS_OFFSET 5-2
+#define STATUS_LINE_OFFSET -5-2
 #endif /* UBYTE_USE_FREETYPE */
 
 int LoadLastSelectedRomPos() // Try to get the last selected rom position from a config file

@@ -307,6 +307,7 @@ void gui_begin(){
 	gui.h = 180;
 	gui.clip.w = gui.w;
 	gui.clip.h = gui.h;
+}
 
 int gui_update(){
 	SDL_UnlockSurface(screen);

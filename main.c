@@ -1607,12 +1607,15 @@ void VideoEnterGame() {
 		screen = SDL_SetVideoMode(160, 144, 16, SDL_HWSURFACE | SDL_DOUBLEBUF);
 	}
 #endif
+	screen = SDL_SetVideoMode(240, 180 , 16, SDL_SWSURFACE);
+	
 }
 
 void VideoExitGame() {
 //#ifdef GCWZERO
 	//screen = SDL_SetVideoMode(160, 120, 16, SDL_HWSURFACE | SDL_DOUBLEBUF); // Force a different resolution before changing from SDL_HWSURFACE|SDL_DOUBLEBUF to SDL_SWSURFACE to avoid screen not updating bug.
-	screen = SDL_SetVideoMode(240, 180 , 16, SDL_HWSURFACE | SDL_FULLSCREEN);
+	//screen = SDL_SetVideoMode(240, 180 , 16, SDL_HWSURFACE | SDL_FULLSCREEN);
+	screen = SDL_SetVideoMode(240, 180 , 16, SDL_HWSURFACE);
 //#endif
 }
 
